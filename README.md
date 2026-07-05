@@ -152,16 +152,16 @@ Future improvements I can implement:
 > Add your screenshots in a folder named `snapshots/` in the repo, then link them below.
 
 ### Main Menu
-![Main Menu](snapshots/main-menu.png)
+![Main Menu](main_menue.jpeg)
 
 ### Live Monitoring Output
-![Live Monitoring](snapshots/live-monitoring.png)
+![Live Monitoring](live_statistics.jpeg)
 
 ### Configuration Menu
-![Configuration Menu](snapshots/config-menu.png)
+![Configuration Menu](config_menue.jpeg)
 
 ### Alerts / Logs
-![Logs](snapshots/log-output.png)
+![Logs](limits.jpeg)
 
 ### Generated Report
-![Report](snapshots/report-output.png)
+![Report](csv-report.jpeg)
