@@ -108,11 +108,11 @@ void ProcessManager::runSubMenu() {
             case 4:
                 std::cout << "Enter PID: ";
                 std::cin >> pid;
-<<<<<<< HEAD
+
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-=======
+
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
->>>>>>> 0ea5044241d6b0c06a4f7ad59e75a5216e5200f6
+
                 terminateProcess(pid);
                 waitForUser();
                 break;
