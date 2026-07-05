@@ -91,9 +91,6 @@ int main() {
             }
             case 6: {
                 clearScreen();
-<<<<<<< HEAD
-                Logger::generateReport();
-=======
     Logger::generateReport();
     waitForUser();
     break;
@@ -107,7 +104,7 @@ case 7: {
 case 8: {         
  clearScreen();
                 ConfigManager::runConfigSubMenu(); 
->>>>>>> 0ea5044241d6b0c06a4f7ad59e75a5216e5200f6
+
                 waitForUser();
                 break;
             }
