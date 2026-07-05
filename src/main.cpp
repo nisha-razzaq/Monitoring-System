@@ -108,18 +108,7 @@ case 8: {
                 waitForUser();
                 break;
             }
-            case 7: {
-                clearScreen();
-                Logger::runStatsSubMenu();
-                waitForUser();
-                break;
-            }
-            case 8: {        
-                clearScreen();
-                ConfigManager::runConfigSubMenu();
-                waitForUser();
-                break;
-            }
+           
             case 9: {
                 // Signal thread to stop and clean up
                 running = false;
