@@ -77,7 +77,11 @@ void Logger::rotateLogsIfNeeded() {
             fs::remove(archives[i].path());
         }
     } catch (...) {
+<<<<<<< HEAD
       
+=======
+        
+>>>>>>> 0ea5044241d6b0c06a4f7ad59e75a5216e5200f6
     }
 }
 

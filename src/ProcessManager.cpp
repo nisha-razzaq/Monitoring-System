@@ -61,7 +61,10 @@ void ProcessManager::runSubMenu() {
 
     while (inSubMenu) {
         clearScreen(); 
+<<<<<<< HEAD
         
+=======
+>>>>>>> 0ea5044241d6b0c06a4f7ad59e75a5216e5200f6
         refreshProcessList();
         std::cout << "============================================================\n";
         std::cout << "              Process Manager\n";
@@ -80,8 +83,7 @@ void ProcessManager::runSubMenu() {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer here
-
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
         switch (ch) {
             case 1:
                 std::sort(processes.begin(), processes.end(), [](auto& a, auto& b) { return a.memoryUsage > b.memoryUsage; });
@@ -106,7 +108,11 @@ void ProcessManager::runSubMenu() {
             case 4:
                 std::cout << "Enter PID: ";
                 std::cin >> pid;
+<<<<<<< HEAD
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+=======
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+>>>>>>> 0ea5044241d6b0c06a4f7ad59e75a5216e5200f6
                 terminateProcess(pid);
                 waitForUser();
                 break;
