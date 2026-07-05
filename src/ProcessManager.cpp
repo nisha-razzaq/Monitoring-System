@@ -60,8 +60,7 @@ void ProcessManager::runSubMenu() {
     DWORD pid;
 
     while (inSubMenu) {
-        clearScreen(); // Using your Utils function
-        
+        clearScreen(); 
         refreshProcessList();
         std::cout << "============================================================\n";
         std::cout << "              Process Manager\n";
@@ -80,8 +79,7 @@ void ProcessManager::runSubMenu() {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer here
-
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
         switch (ch) {
             case 1:
                 std::sort(processes.begin(), processes.end(), [](auto& a, auto& b) { return a.memoryUsage > b.memoryUsage; });
@@ -96,7 +94,7 @@ void ProcessManager::runSubMenu() {
             case 3:
                 std::cout << "Search name: ";
                 std::cin >> s;
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
                 for (const auto& p : processes) {
                     if (p.name.find(s) != std::string::npos) 
                         std::cout << p.pid << " : " << p.name << "\n";
@@ -106,7 +104,7 @@ void ProcessManager::runSubMenu() {
             case 4:
                 std::cout << "Enter PID: ";
                 std::cin >> pid;
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 terminateProcess(pid);
                 waitForUser();
                 break;
