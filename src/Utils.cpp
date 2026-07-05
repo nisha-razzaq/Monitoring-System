@@ -12,8 +12,6 @@ void clearScreen() {
 }
 void waitForUser() {
     std::cout << "\nPress Enter to return to menu...";
-    
-    // Clear everything currently in the buffer
     std::cin.sync(); 
     std::cin.get();
 }

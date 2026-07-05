@@ -6,4 +6,4 @@
 
 void waitForUser();
 void clearScreen();
-#endif // <--- THIS LINE IS MISSING!
+#endif 

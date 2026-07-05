@@ -4,7 +4,8 @@
 #include "BaseMonitor.h"
 #include <string>
 
-class DiskMonitor : public BaseMonitor {
+class DiskMonitor : public BaseMonitor
+{
 private:
     double totalSpace, usedSpace, freeSpace, usagePercentage;
 

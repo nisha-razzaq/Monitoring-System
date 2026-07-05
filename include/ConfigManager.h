@@ -3,7 +3,8 @@
 
 #include <string>
 
-class ConfigManager {
+class ConfigManager
+{
 public:
     static void loadConfig();
     static void runConfigSubMenu();

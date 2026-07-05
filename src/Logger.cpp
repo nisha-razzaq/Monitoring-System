@@ -77,7 +77,7 @@ void Logger::rotateLogsIfNeeded() {
             fs::remove(archives[i].path());
         }
     } catch (...) {
-        // Keep logging non-fatal; do not crash monitoring app due to file issues
+      
     }
 }
 

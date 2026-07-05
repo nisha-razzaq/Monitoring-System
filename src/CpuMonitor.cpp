@@ -2,9 +2,30 @@
 #include <iostream>
 #include <iomanip>
 #include "../include/ConfigManager.h"
+#include <pdh.h>
+#pragma comment(lib, "pdh.lib")
 
 CpuMonitor::CpuMonitor() : activeCores(0), usagePercentage(0.0) {
     prevIdleTime = {0, 0}; prevKernelTime = {0, 0}; prevUserTime = {0, 0};
+}
+
+
+void CpuMonitor::display() const {
+    std::cout << "CpuMonitor: Use displayCached() with system metrics." << std::endl;
+}
+
+double CpuMonitor::getLoad() const {
+    PDH_HQUERY cpuQuery;
+    PDH_HCOUNTER cpuCounter;
+    PdhOpenQuery(NULL, 0, &cpuQuery);
+    PdhAddCounter(cpuQuery, "\\System\\Processor Queue Length", 0, &cpuCounter);
+    PdhCollectQueryData(cpuQuery);
+    
+    PDH_FMT_COUNTERVALUE counterVal;
+    PdhGetFormattedCounterValue(cpuCounter, PDH_FMT_DOUBLE, NULL, &counterVal);
+    PdhCloseQuery(cpuQuery);
+    
+    return counterVal.doubleValue;
 }
 
 unsigned long long CpuMonitor::ft2ull(FILETIME ft) {
@@ -35,7 +56,6 @@ void CpuMonitor::update() {
         if (history.size() > 5) history.erase(history.begin());
     }
 
-    // UPDATED ALERT LOGIC (fixed: use getter instead of private variable)
     if (usagePercentage > ConfigManager::getCpuThreshold()) {
         std::cout << "\n[!!! ALERT !!!] CPU Usage critical: "
                   << usagePercentage << "% (Threshold: "
@@ -43,25 +63,20 @@ void CpuMonitor::update() {
     }
 }
 
-void CpuMonitor::display() const {
+// 3. Your specific UI logic using cached data
+void CpuMonitor::displayCached(const SystemMetrics& data) const {
     std::cout << "============================================================\n";
     std::cout << std::setw(35) << "              CPU Statistics\n";
     std::cout << "============================================================\n";
 
-    // 1. Current CPU Usage
-    std::cout << std::setw(25) << "Current CPU Usage: " << std::setw(15) << usagePercentage << "%" << std::endl;
+    std::cout << std::setw(25) << "Current CPU Usage: " << std::setw(21) << data.cpuUsage << "%" << std::endl;
+    std::cout << std::setw(24) << "CPU Load(Queue) : " << std::setw(13) << data.cpuLoad << std::endl;
+    std::cout << std::setw(30) << "Number of Active Cores: " << std::setw(10) << data.activeCores << std::endl;
 
-    // 2. CPU Load Percentage
-    std::cout << std::setw(27) << "CPU Load Percentage: " << std::setw(13) << usagePercentage << "%" << std::endl;
-
-    // 3. Number of Active Cores
-    std::cout << std::setw(30) << "Number of Active Cores: " << std::setw(4) << activeCores << std::endl;
-
-    // 4. CPU Usage History
     std::cout << std::setw(25) << "CPU Usage History: ";
-    for (size_t i = 0; i < history.size(); ++i) {
-        std::cout << std::setw(15) << history[i] << "%";
-        if (i < history.size() - 1) std::cout << " -> ";
+    for (size_t i = 0; i < data.history.size(); ++i) {
+        std::cout << std::setw(21) << data.history[i] << "%";
+        if (i < data.history.size() - 1) std::cout << "\n"<< std::setw(25) << " ";
     }
     std::cout << std::endl;
     std::cout << "------------------------------------------------------------\n";

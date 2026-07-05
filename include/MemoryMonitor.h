@@ -1,19 +1,29 @@
 #ifndef MEMORY_MONITOR_H
 #define MEMORY_MONITOR_H
 
-#include "BaseMonitor.h"
-#include <string>
+#include "../include/BaseMonitor.h"
+#include "../include/MonitorCache.h"
 
-class MemoryMonitor : public BaseMonitor {
+class MemoryMonitor : public BaseMonitor
+{
 private:
-    unsigned long long totalMemory, usedMemory, availableMemory, swapMemory;
-    double usagePercentage;
+    MetricsCache& cache;
+    double totalMemory;
+    double usedMemory;
+    double availableMemory;
+    double swapMemory;
+    double memUsagePercentage;
 
 public:
-    MemoryMonitor();
+     MemoryMonitor(MetricsCache& c);
     void update() override;
     void display() const override;
-    std::string getLogData() const override;
-};
+    double getTotalMemory() const { return totalMemory; }
+    double getUsedMemory() const { return usedMemory; }
+    double getAvailableMemory() const { return availableMemory; }
+    double getUsagePercentage() const { return memUsagePercentage; }
+    void displayCached(const SystemMetrics& data) const;
+   
+    std::string getLogData() const override;}; 
 
 #endif

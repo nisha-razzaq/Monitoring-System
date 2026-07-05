@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCES
     src/main.cpp
-    
+    src/DataCollector.cpp
     src/ConfigManager.cpp
     src/CpuMonitor.cpp
     src/DiskMonitor.cpp
@@ -18,7 +18,10 @@ set(SOURCES
 )
 
 add_executable(MonitoringSystem ${SOURCES})
-
-if (WIN32)
-    target_link_libraries(MonitoringSystem psapi)
-endif()
+find_package(Threads REQUIRED)
+target_link_libraries(MonitoringSystem 
+    PRIVATE 
+    Threads::Threads 
+    pdh 
+    psapi
+)
