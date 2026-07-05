@@ -95,7 +95,7 @@ case 7: {
 }
 case 8: {         
  clearScreen();
-                ConfigManager::runConfigSubMenu(); // Your new config submenu
+                ConfigManager::runConfigSubMenu(); 
                 waitForUser();
                 break;
             }
